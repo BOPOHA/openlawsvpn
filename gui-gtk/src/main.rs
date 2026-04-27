@@ -3,6 +3,7 @@ mod about_view;
 mod connection;
 mod log_view;
 mod profile_store;
+mod saml_server;
 mod tray;
 mod vpn_service;
 
@@ -159,13 +160,6 @@ fn build_ui(app: &Application) {
                 }
                 VpnEvent::LogLine(line) => {
                     log_view.append_line(&line);
-                }
-                VpnEvent::StatsUpdate { bytes_sent, bytes_recv, uptime_secs } => {
-                    // Forward to log view as a compact stats line.
-                    log_view.append_line(&format!(
-                        "stats: ↑{} ↓{} up {}s",
-                        bytes_sent, bytes_recv, uptime_secs
-                    ));
                 }
             }
         }
