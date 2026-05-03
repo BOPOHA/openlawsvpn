@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>openlawsvpn — AWS Client VPN without the proprietary client</title>
   <link rel="canonical" href="https://openlawsvpn.com">
-  <meta name="description" content="Native SAML/SSO for Linux. Works headless. Free forever.">
+  <meta name="description" content="Native SAML/SSO for Linux and Android. Works headless and in CI/CD. Free forever.">
   <meta property="og:title" content="openlawsvpn — AWS Client VPN without the proprietary client">
-  <meta property="og:description" content="Native SAML/SSO for Linux. Works headless. Free forever.">
+  <meta property="og:description" content="Native SAML/SSO for Linux and Android. Works headless and in CI/CD. Free forever.">
   <meta property="og:url" content="https://openlawsvpn.com">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23f78166'>|</text></svg>">
@@ -24,11 +24,7 @@
       --code-bg:  #1f2428;
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg);
@@ -43,7 +39,7 @@
       padding: 0 24px;
     }
 
-    /* Wordmark */
+    /* ── Wordmark ── */
     .wordmark {
       font-size: 44px;
       letter-spacing: -1px;
@@ -55,35 +51,14 @@
     .wm-aws  { color: var(--muted); }
     .wm-vpn  { color: var(--text); }
 
-    /* Status badge pulse */
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.3; }
-    }
-    .dot {
-      color: var(--green);
-      animation: pulse 2s ease-in-out infinite;
-      display: inline-block;
-    }
+    /* ── Status badge ── */
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .dot { color: var(--green); animation: pulse 2s ease-in-out infinite; display: inline-block; }
 
-    /* Hero */
-    .hero {
-      padding: 40px 0 32px;
-    }
-
-    .hero-tagline {
-      font-size: 20px;
-      color: var(--muted);
-      margin-top: 20px;
-      max-width: 600px;
-    }
-
-    .hero-sub {
-      font-size: 16px;
-      color: var(--muted);
-      margin-top: 8px;
-      max-width: 580px;
-    }
+    /* ── Hero ── */
+    .hero { padding: 40px 0 32px; }
+    .hero-tagline { font-size: 20px; color: var(--muted); margin-top: 20px; max-width: 600px; }
+    .hero-sub     { font-size: 16px; color: var(--muted); margin-top: 8px; max-width: 580px; }
 
     .hero-badge {
       display: inline-flex;
@@ -98,12 +73,7 @@
       color: var(--muted);
     }
 
-    .hero-cta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 
     .btn {
       display: inline-block;
@@ -115,39 +85,133 @@
       transition: opacity 0.15s;
     }
     .btn:hover { opacity: 0.85; }
+    .btn-primary   { background: var(--accent); color: #0d1117; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #0d1117;
+    /* ── Features ── */
+    .features {
+      padding: 48px 0 40px;
+      border-top: 1px solid var(--border);
     }
-
-    .btn-secondary {
+    .features h2 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
       background: var(--surface);
-      color: var(--text);
       border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .feature-card .icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .feature-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .feature-card .tag {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 2px 8px;
+      font-size: 11px;
+      border-radius: 4px;
+      background: var(--code-bg);
+      color: var(--green);
+      border: 1px solid var(--border);
+      font-family: ui-monospace, monospace;
     }
 
-    /* Install section */
+    /* ── Relay promo ── */
+    .relay-section {
+      padding: 40px 0 48px;
+      border-top: 1px solid var(--border);
+    }
+    .relay-section h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .relay-section .lede {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 640px;
+      margin-bottom: 28px;
+    }
+    .relay-diagram {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .relay-diagram svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .relay-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .relay-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .relay-step .num {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+    .relay-step p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .relay-step strong { color: var(--text); }
+
+    /* ── Install section ── */
     .install {
       padding: 24px 0 48px;
       border-top: 1px solid var(--border);
     }
+    .install h2 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
 
-    .install h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    /* CSS tabs — no JS */
     .tabs input[type="radio"] { display: none; }
-
     .tab-labels {
       display: flex;
       gap: 0;
       border-bottom: 1px solid var(--border);
     }
-
     .tab-labels label {
       padding: 8px 18px;
       cursor: pointer;
@@ -156,23 +220,18 @@
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
     }
-
-    #tab-binary:checked ~ .tab-labels label[for="tab-binary"],
-    #tab-fedora:checked ~ .tab-labels label[for="tab-fedora"],
+    #tab-binary:checked  ~ .tab-labels label[for="tab-binary"],
+    #tab-fedora:checked  ~ .tab-labels label[for="tab-fedora"],
     #tab-android:checked ~ .tab-labels label[for="tab-android"],
-    #tab-source:checked ~ .tab-labels label[for="tab-source"] {
+    #tab-source:checked  ~ .tab-labels label[for="tab-source"] {
       color: var(--text);
       border-bottom-color: var(--accent);
     }
-
     .tab-panel { display: none; }
-
-    #tab-binary:checked ~ .tab-panels #panel-binary,
-    #tab-fedora:checked ~ .tab-panels #panel-fedora,
+    #tab-binary:checked  ~ .tab-panels #panel-binary,
+    #tab-fedora:checked  ~ .tab-panels #panel-fedora,
     #tab-android:checked ~ .tab-panels #panel-android,
-    #tab-source:checked ~ .tab-panels #panel-source {
-      display: block;
-    }
+    #tab-source:checked  ~ .tab-panels #panel-source { display: block; }
 
     .tab-panel pre {
       background: var(--code-bg);
@@ -183,14 +242,8 @@
       margin: 0;
       overflow-x: auto;
     }
+    .tab-panel code { font-family: ui-monospace, monospace; font-size: 14px; color: var(--text); }
 
-    .tab-panel code {
-      font-family: ui-monospace, monospace;
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    /* Sub-tabs within a panel (root vs rootless) */
     .install-modes {
       display: flex;
       flex-direction: column;
@@ -202,53 +255,21 @@
       border-radius: 0 0 6px 6px;
     }
 
-    .install-mode-label {
-      font-size: 13px;
-      color: var(--muted);
-      font-family: ui-monospace, monospace;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .install-mode-label span {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2px 8px;
-    }
-
-    .install-mode pre {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-      margin: 0;
-      overflow-x: auto;
-    }
-
     .install-note {
       font-size: 13px;
       color: var(--muted);
       margin-top: 8px;
       font-family: ui-monospace, monospace;
     }
+    .install-note::before { content: '# '; color: var(--border); }
 
-    .install-note::before {
-      content: '# ';
-      color: var(--border);
-    }
-
-    /* Inner sub-tabs (used inside Fedora panel) */
     .sub-tabs input[type="radio"] { display: none; }
-
     .sub-tab-labels {
       display: flex;
       gap: 0;
       border-bottom: 1px solid var(--border);
       margin-bottom: 0;
     }
-
     .sub-tab-labels label {
       padding: 6px 14px;
       cursor: pointer;
@@ -258,7 +279,6 @@
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
     }
-
     #ftab-root:checked     ~ .sub-tab-labels label[for="ftab-root"],
     #ftab-rootless:checked ~ .sub-tab-labels label[for="ftab-rootless"],
     #ftab-gui:checked      ~ .sub-tab-labels label[for="ftab-gui"],
@@ -269,18 +289,14 @@
       color: var(--text);
       border-bottom-color: var(--accent);
     }
-
     .sub-tab-panel { display: none; padding: 16px 0 4px; }
-
     #ftab-root:checked     ~ .sub-tab-panels #fpanel-root,
     #ftab-rootless:checked ~ .sub-tab-panels #fpanel-rootless,
     #ftab-gui:checked      ~ .sub-tab-panels #fpanel-gui,
     #btab-amd64:checked    ~ .sub-tab-panels #bpanel-amd64,
     #btab-arm64:checked    ~ .sub-tab-panels #bpanel-arm64,
     #atab-fdroid:checked   ~ .sub-tab-panels #apanel-fdroid,
-    #atab-apk:checked      ~ .sub-tab-panels #apanel-apk {
-      display: block;
-    }
+    #atab-apk:checked      ~ .sub-tab-panels #apanel-apk { display: block; }
 
     .copr-status {
       display: flex;
@@ -294,17 +310,14 @@
     }
     .copr-status img { display: block; border-radius: 3px; }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
       padding: 24px 0;
       border-top: 1px solid var(--border);
       font-size: 13px;
       color: var(--muted);
     }
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
+    footer a { color: var(--muted); text-decoration: none; }
     footer a:hover { color: var(--text); }
 
     @media (max-width: 480px) {
@@ -317,6 +330,7 @@
 </head>
 <body>
 
+  <!-- ═══════════ HERO ═══════════ -->
   <section class="hero">
     <div class="container">
       <div class="wordmark">
@@ -324,21 +338,314 @@
       </div>
 
       <p class="hero-tagline">AWS Client VPN without the proprietary client</p>
-      <p class="hero-sub">Native SAML/SSO for Linux — including headless servers and CI/CD</p>
+      <p class="hero-sub">Native SAML/SSO for Linux and Android — including headless servers and CI/CD pipelines</p>
 
       <div class="hero-badge">
         <span class="dot">●</span>
-        v1.0.0-10 · SAML working · GTK4 GUI · FC43/44/rawhide · amd64/arm64/ppc64le
+        v1.0.0-10 Linux · v0.1.8 Android · relay v0.2.8 · GTK4 GUI · FC43/44/rawhide · amd64/arm64/ppc64le
       </div>
 
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://github.com/openlawsvpn/openlawsvpn">View on GitHub →</a>
         <a class="btn btn-secondary" href="#install">Install ↓</a>
+        <a class="btn btn-secondary" href="#relay">Relay / CI ↓</a>
         <a class="btn btn-secondary" href="https://github.com/openlawsvpn/openlawsvpn#readme">Read docs →</a>
       </div>
     </div>
   </section>
 
+  <!-- ═══════════ FEATURES ═══════════ -->
+  <section class="features">
+    <div class="container">
+      <h2>What's included</h2>
+      <div class="feature-grid">
+
+        <div class="feature-card">
+          <span class="icon">🔐</span>
+          <h3>Full SAML / SSO</h3>
+          <p>Complete CRV1 challenge flow — Okta, Azure AD, Google Workspace, any AWS-supported IdP.</p>
+          <span class="tag">working</span>
+        </div>
+
+        <div class="feature-card">
+          <span class="icon">🐧</span>
+          <h3>Native Linux CLI</h3>
+          <p>Statically linked binary. No Mono, no Java, no Electron. Root or rootless D-Bus mode via openvpn3.</p>
+          <span class="tag">working</span>
+        </div>
+
+        <div class="feature-card">
+          <span class="icon">🖥️</span>
+          <h3>GTK4 Desktop GUI</h3>
+          <p>libadwaita app for GNOME. Profile importer, connection status, tray icon. Ships as an RPM.</p>
+          <span class="tag">working</span>
+        </div>
+
+        <div class="feature-card">
+          <span class="icon">📱</span>
+          <h3>Android App</h3>
+          <p>Pure Go VPN core via gomobile — no NDK, no JNI. SAML auth in-app via Chrome Custom Tab.</p>
+          <span class="tag">working · F-Droid pending</span>
+        </div>
+
+        <div class="feature-card">
+          <span class="icon">⚙️</span>
+          <h3>Relay — Headless Auth</h3>
+          <p>CI/CD runners and remote VMs can't open a browser. Relay lets a human approve VPN auth from their phone with one tap.</p>
+          <span class="tag">new · v0.2.8</span>
+        </div>
+
+        <div class="feature-card">
+          <span class="icon">📦</span>
+          <h3>F-Droid &amp; COPR</h3>
+          <p>Fully reproducible builds. No prebuilt blobs. Fedora COPR packages for FC43/44/rawhide on three architectures.</p>
+          <span class="tag">working</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ RELAY SECTION ═══════════ -->
+  <section class="relay-section" id="relay">
+    <div class="container">
+      <h2>Relay — VPN auth for CI/CD and headless servers</h2>
+      <p class="lede">
+        AWS Client VPN requires a browser for SAML authentication. That's fine on a developer laptop,
+        but impossible on a CI runner or a remote VM behind NAT.
+        The relay bridges the gap: the headless agent registers, your phone approves, the tunnel comes up.
+        Zero secrets stored in CI.
+      </p>
+
+      <!-- inline SVG promo -->
+      <div class="relay-diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520"
+             font-family="'SF Mono','Fira Code','Consolas',ui-monospace,monospace">
+          <defs>
+            <filter id="glow" x="-20%" y="-200%" width="140%" height="500%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <marker id="arr-grn" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0,8 3,0 6" fill="#3fb950"/>
+            </marker>
+            <marker id="arr-muted" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0,8 3,0 6" fill="#8b949e"/>
+            </marker>
+            <marker id="arr-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0,8 3,0 6" fill="#f78166"/>
+            </marker>
+            <marker id="arr-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0,8 3,0 6" fill="#58a6ff"/>
+            </marker>
+          </defs>
+
+          <rect width="1200" height="520" fill="#0d1117"/>
+
+          <!-- grid -->
+          <g stroke="#161b22" stroke-width="1" opacity="0.7">
+            <line x1="0" y1="130" x2="1200" y2="130"/>
+            <line x1="0" y1="260" x2="1200" y2="260"/>
+            <line x1="0" y1="390" x2="1200" y2="390"/>
+            <line x1="300" y1="0" x2="300" y2="520"/>
+            <line x1="600" y1="0" x2="600" y2="520"/>
+            <line x1="900" y1="0" x2="900" y2="520"/>
+          </g>
+
+          <!-- ── wordmark top-left ── -->
+          <text x="32" y="44" font-size="26" font-weight="700" letter-spacing="-1"
+                font-family="system-ui,-apple-system,sans-serif">
+            <tspan fill="#e6edf3">open</tspan><tspan fill="#f78166" font-weight="300">|</tspan><tspan fill="#8b949e">aws</tspan><tspan fill="#e6edf3">vpn</tspan>
+          </text>
+          <text x="32" y="62" font-size="12" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">relay — headless SAML auth for CI/CD</text>
+
+          <!-- ══ LEFT: CI Terminal ══ -->
+          <rect x="32" y="84" width="400" height="388" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+          <!-- title bar -->
+          <rect x="32" y="84" width="400" height="32" rx="8" fill="#1f2428"/>
+          <rect x="32" y="104" width="400" height="12" fill="#1f2428"/>
+          <circle cx="52"  cy="100" r="5" fill="#f87171"/>
+          <circle cx="68"  cy="100" r="5" fill="#fbbf24"/>
+          <circle cx="84"  cy="100" r="5" fill="#3fb950"/>
+          <text x="232" y="104" text-anchor="middle" font-size="11" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">VPN Integration · GitHub Actions</text>
+
+          <!-- steps -->
+          <g font-size="12" fill="#8b949e" font-family="system-ui,-apple-system,sans-serif">
+            <text x="52" y="142" fill="#3fb950">✓</text><text x="68" y="142" fill="#c9d1d9">Set up openlawsvpn</text>
+            <text x="52" y="163" fill="#3fb950">✓</text><text x="68" y="163" fill="#c9d1d9">Checkout</text>
+
+            <rect x="44" y="172" width="380" height="20" rx="4" fill="#1f2428"/>
+            <text x="52" y="186" fill="#f78166">▶</text>
+            <text x="68" y="186" fill="#e6edf3" font-weight="700">Start relay agent</text>
+          </g>
+
+          <!-- command block -->
+          <g font-size="12" font-family="'SF Mono','Fira Code',ui-monospace,monospace">
+            <text x="64" y="210" fill="#8b949e">$</text>
+            <text x="76" y="210" fill="#c9d1d9">openlawsvpn-cli \</text>
+            <text x="76" y="228" fill="#c9d1d9">  -relay $RELAY_TOKEN -daemon \</text>
+            <text x="76" y="246" fill="#c9d1d9">  -pidfile /tmp/vpn.pid</text>
+            <text x="76" y="268" fill="#58a6ff">waiting for app to connect...</text>
+          </g>
+
+          <!-- divider -->
+          <line x1="44" y1="282" x2="420" y2="282" stroke="#30363d" stroke-width="1"/>
+          <g font-size="12" fill="#6e7681" font-family="system-ui,-apple-system,sans-serif">
+            <text x="52" y="300">○</text><text x="68" y="300">Check internal service health</text>
+            <text x="52" y="320">○</text><text x="68" y="320">Disconnect VPN</text>
+            <text x="52" y="340">○</text><text x="68" y="340">Upload relay agent log</text>
+          </g>
+
+          <!-- tunnel-up banner -->
+          <rect x="44" y="356" width="380" height="50" rx="6" fill="#0d3321" stroke="#3fb950" stroke-width="1"/>
+          <text x="62" y="374" font-size="11" fill="#3fb950" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">TUNNEL UP</text>
+          <text x="62" y="390" font-size="11" fill="#3fb950"
+                font-family="'SF Mono','Fira Code',ui-monospace,monospace">tun=172.16.77.1   pid=12483</text>
+          <text x="62" y="406" font-size="11" fill="#56d364"
+                font-family="system-ui,-apple-system,sans-serif">daemon started · zero SAML secrets in CI</text>
+
+          <!-- ══ MIDDLE: Relay ══ -->
+          <rect x="524" y="194" width="112" height="56" rx="8" fill="#161b22" stroke="#7c3aed" stroke-width="1.5"/>
+          <text x="580" y="218" text-anchor="middle" font-size="12" fill="#a78bfa" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">Relay</text>
+          <text x="580" y="234" text-anchor="middle" font-size="10" fill="#7c3aed"
+                font-family="system-ui,-apple-system,sans-serif">APIGW · DDB · SQS</text>
+          <text x="580" y="246" text-anchor="middle" font-size="10" fill="#7c3aed"
+                font-family="system-ui,-apple-system,sans-serif">Lambda</text>
+
+          <!-- CI → Relay WS -->
+          <line x1="432" y1="232" x2="522" y2="222" stroke="#58a6ff" stroke-width="1.5"
+                stroke-dasharray="5,3" marker-end="url(#arr-blue)"/>
+          <text x="477" y="215" text-anchor="middle" font-size="10" fill="#58a6ff"
+                font-family="system-ui,-apple-system,sans-serif">WS register</text>
+
+          <!-- Relay → CI phase2 -->
+          <line x1="522" y1="240" x2="432" y2="256" stroke="#f78166" stroke-width="1.5"
+                marker-end="url(#arr-accent)"/>
+          <text x="477" y="266" text-anchor="middle" font-size="10" fill="#f78166"
+                font-family="system-ui,-apple-system,sans-serif">phase2 push</text>
+
+          <!-- App → Relay execute -->
+          <line x1="692" y1="222" x2="638" y2="222" stroke="#0891b2" stroke-width="1.5"
+                marker-end="url(#arr-muted)"/>
+          <text x="665" y="215" text-anchor="middle" font-size="10" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">POST /execute</text>
+
+          <!-- ══ RIGHT: Phone ══ -->
+          <rect x="692" y="84" width="196" height="348" rx="16" fill="#1c1c1e" stroke="#30363d" stroke-width="1.5"/>
+          <rect x="692" y="84" width="196" height="24" rx="16" fill="#1c1c1e"/>
+          <rect x="692" y="96" width="196" height="12" fill="#1c1c1e"/>
+          <rect x="750" y="88" width="80" height="14" rx="7" fill="#0d1117"/>
+          <!-- screen -->
+          <rect x="699" y="108" width="182" height="312" rx="6" fill="#0d1117"/>
+          <!-- top bar -->
+          <rect x="699" y="108" width="182" height="36" fill="#161b22"/>
+          <text x="790" y="131" text-anchor="middle" font-size="14" fill="#e6edf3" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">Relay</text>
+          <!-- token field -->
+          <rect x="707" y="152" width="166" height="28" rx="5" fill="#1f2428" stroke="#30363d" stroke-width="1"/>
+          <text x="715" y="168" font-size="9" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">Organisation Token</text>
+          <text x="715" y="176" font-size="8" fill="#3fb950"
+                font-family="'SF Mono','Fira Code',ui-monospace,monospace">OEJlyJA8•••Nhtvw</text>
+          <!-- save btn -->
+          <rect x="707" y="188" width="166" height="24" rx="12" fill="#1a6335"/>
+          <text x="790" y="204" text-anchor="middle" font-size="11" fill="#3fb950" font-weight="600"
+                font-family="system-ui,-apple-system,sans-serif">Save &amp; Refresh</text>
+          <!-- agents label -->
+          <text x="715" y="230" font-size="11" fill="#8b949e" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">Available Agents</text>
+          <!-- agent row -->
+          <rect x="707" y="238" width="166" height="44" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+          <text x="715" y="254" font-size="11" fill="#e6edf3" font-weight="600"
+                font-family="system-ui,-apple-system,sans-serif">build-runner-01</text>
+          <text x="715" y="268" font-size="10" fill="#58a6ff"
+                font-family="system-ui,-apple-system,sans-serif">standby</text>
+          <rect x="816" y="244" width="50" height="22" rx="11" fill="#1a6335"/>
+          <text x="841" y="259" text-anchor="middle" font-size="10" fill="#3fb950" font-weight="600"
+                font-family="system-ui,-apple-system,sans-serif">Connect</text>
+          <!-- status banner -->
+          <rect x="707" y="292" width="166" height="52" rx="5" fill="#0d3321" stroke="#3fb950" stroke-width="1"/>
+          <circle cx="721" cy="318" r="7" fill="none" stroke="#3fb950" stroke-width="2"
+                  stroke-dasharray="24 14"/>
+          <text x="735" y="312" font-size="10" fill="#3fb950" font-weight="600"
+                font-family="system-ui,-apple-system,sans-serif">Delivering…</text>
+          <text x="735" y="326" font-size="9" fill="#56d364"
+                font-family="system-ui,-apple-system,sans-serif">Agent tunnel is up.</text>
+          <text x="735" y="338" font-size="9" fill="#56d364"
+                font-family="system-ui,-apple-system,sans-serif">session f5d1c84c</text>
+          <!-- bottom nav -->
+          <rect x="699" y="392" width="182" height="28" fill="#161b22"/>
+          <text x="724" y="410" text-anchor="middle" font-size="10" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">Profiles</text>
+          <text x="762" y="410" text-anchor="middle" font-size="10" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">Connect</text>
+          <text x="800" y="410" text-anchor="middle" font-size="10" fill="#3fb950" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">Relay</text>
+          <text x="840" y="410" text-anchor="middle" font-size="10" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">Settings</text>
+          <rect x="764" y="423" width="52" height="4" rx="2" fill="#30363d"/>
+
+          <!-- phone label -->
+          <text x="790" y="452" text-anchor="middle" font-size="11" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">openlawsvpn Android</text>
+          <text x="790" y="468" text-anchor="middle" font-size="10" fill="#6e7681"
+                font-family="system-ui,-apple-system,sans-serif">one tap · zero secrets in CI</text>
+
+          <!-- ══ FAR RIGHT: AWS VPN ══ -->
+          <rect x="940" y="188" width="220" height="68" rx="8" fill="#161b22" stroke="#f97316" stroke-width="1.5"/>
+          <text x="1050" y="214" text-anchor="middle" font-size="13" fill="#fb923c" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">AWS Client VPN</text>
+          <text x="1050" y="232" text-anchor="middle" font-size="10" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">vpn.us-east-1.amazonaws.com</text>
+          <text x="1050" y="248" text-anchor="middle" font-size="10" fill="#6e7681"
+                font-family="system-ui,-apple-system,sans-serif">your existing infra — nothing changes</text>
+
+          <!-- CI → AWS: Phase 2 tunnel line -->
+          <line x1="432" y1="378" x2="938" y2="224" stroke="#3fb950" stroke-width="2.5"
+                stroke-dasharray="8,4" marker-end="url(#arr-grn)" filter="url(#glow)"/>
+          <text x="695" y="328" text-anchor="middle" font-size="13" fill="#3fb950" font-weight="700"
+                font-family="system-ui,-apple-system,sans-serif">Phase 2 · tunnel up ✓</text>
+          <text x="695" y="346" text-anchor="middle" font-size="10" fill="#56d364"
+                font-family="system-ui,-apple-system,sans-serif">CRV1::state_id::SAMLResponse</text>
+
+          <!-- bottom caption -->
+          <line x1="0" y1="494" x2="1200" y2="494" stroke="#30363d" stroke-width="1"/>
+          <text x="32" y="512" font-size="12" fill="#8b949e"
+                font-family="system-ui,-apple-system,sans-serif">
+            <tspan fill="#e6edf3" font-weight="600">SAML relay</tspan>
+            <tspan> — headless CI runner authenticates via human approval on phone. No browser on the server. No credentials in CI env.</tspan>
+          </text>
+        </svg>
+      </div>
+
+      <!-- relay flow steps -->
+      <div class="relay-steps">
+        <div class="relay-step">
+          <div class="num">1</div>
+          <p><strong>Agent registers.</strong> CI runner starts <code style="font-size:12px;color:var(--green)">openlawsvpn-cli -relay &lt;token&gt; -daemon</code> and connects a WebSocket to the relay. No inbound port needed.</p>
+        </div>
+        <div class="relay-step">
+          <div class="num">2</div>
+          <p><strong>App authenticates.</strong> Developer opens the Android or desktop app, sees the agent listed as <em>standby</em>, taps Connect. The app runs Phase 1 + full SAML browser flow.</p>
+        </div>
+        <div class="relay-step">
+          <div class="num">3</div>
+          <p><strong>Relay delivers credentials.</strong> App sends the completed SAMLResponse to the relay via HTTPS. Relay pushes it to the waiting agent over the WebSocket.</p>
+        </div>
+        <div class="relay-step">
+          <div class="num">4</div>
+          <p><strong>Tunnel up.</strong> Agent executes Phase 2, VPN is established. CI build continues. App shows the agent as <em>connected</em> and can disconnect remotely at any time.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ INSTALL ═══════════ -->
   <section class="install" id="install">
     <div class="container">
       <h2>Install</h2>
@@ -371,26 +678,23 @@
                 </div>
 
                 <div class="sub-tab-panels">
-
                   <div class="sub-tab-panel" id="bpanel-amd64">
                     <pre><code>BASE=https://github.com/openlawsvpn/openlawsvpn/releases/latest/download
 curl -LO $BASE/openlawsvpn-cli-linux-amd64
 chmod +x openlawsvpn-cli-linux-amd64
 sudo mv openlawsvpn-cli-linux-amd64 /usr/local/bin/openlawsvpn-cli</code></pre>
                   </div>
-
                   <div class="sub-tab-panel" id="bpanel-arm64">
                     <pre><code>BASE=https://github.com/openlawsvpn/openlawsvpn/releases/latest/download
 curl -LO $BASE/openlawsvpn-cli-linux-arm64
 chmod +x openlawsvpn-cli-linux-arm64
 sudo mv openlawsvpn-cli-linux-arm64 /usr/local/bin/openlawsvpn-cli</code></pre>
                   </div>
-
                 </div>
               </div>
 
-              <p class="install-note">CLI only — statically linked, no dependencies; standalone mode (requires root or CAP_NET_ADMIN+CAP_NET_RAW)</p>
-              <p class="install-note">for ppc64le or rootless D-Bus mode, use the Fedora / RHEL tab</p>
+              <p class="install-note">statically linked, zero dependencies — requires root or CAP_NET_ADMIN+CAP_NET_RAW</p>
+              <p class="install-note">for ppc64le, rootless, or relay mode with daemon management, use the Fedora / RHEL tab</p>
 
             </div>
           </div>
@@ -410,28 +714,25 @@ sudo mv openlawsvpn-cli-linux-arm64 /usr/local/bin/openlawsvpn-cli</code></pre>
                 </div>
 
                 <div class="sub-tab-panels">
-
                   <div class="sub-tab-panel" id="fpanel-root">
                     <pre><code>dnf copr enable vorona/openlawsvpn -y
 dnf install openlawsvpn-cli -y
 openlawsvpn-cli connect /path/to/client-config.ovpn --standalone</code></pre>
                     <p class="install-note">standalone mode — requires root or CAP_NET_ADMIN+CAP_NET_RAW</p>
+                    <p class="install-note">relay mode: openlawsvpn-cli -relay &lt;token&gt; -daemon</p>
                   </div>
-
                   <div class="sub-tab-panel" id="fpanel-rootless">
                     <pre><code>sudo dnf copr enable vorona/openlawsvpn -y
 sudo dnf install openlawsvpn-cli openvpn3 -y
 openlawsvpn-cli connect ~/Downloads/client-config.ovpn</code></pre>
                     <p class="install-note">rootless D-Bus mode — requires openvpn3 and gdbuspp</p>
                   </div>
-
                   <div class="sub-tab-panel" id="fpanel-gui">
                     <pre><code>sudo dnf copr enable vorona/openlawsvpn -y
 sudo dnf install openlawsvpn-gui -y
 openlawsvpn-gui</code></pre>
-                    <p class="install-note">GTK4 + libadwaita desktop app — pulls in openlawsvpn-cli automatically</p>
+                    <p class="install-note">GTK4 + libadwaita desktop app — includes relay screen; pulls in openlawsvpn-cli automatically</p>
                   </div>
-
                 </div>
               </div>
 
@@ -458,23 +759,21 @@ openlawsvpn-gui</code></pre>
                 </div>
 
                 <div class="sub-tab-panels">
-
                   <div class="sub-tab-panel" id="apanel-fdroid">
                     <pre><code># merge request submitted — awaiting F-Droid review
 # watch the repo for the release announcement</code></pre>
                     <p class="install-note">F-Droid listing pending approval &nbsp;·&nbsp; <a href="https://github.com/openlawsvpn/openlawsvpn-android" style="color:var(--blue)">Android repo →</a></p>
                   </div>
-
                   <div class="sub-tab-panel" id="apanel-apk">
                     <pre><code># APK artifacts require a free GitHub account to download
 # sign in at github.com, then open the link below</code></pre>
-                    <p class="install-note"><a href="https://github.com/openlawsvpn/openlawsvpn-android/actions/runs/24481773113" style="color:var(--blue)">Latest CI build (GitHub Actions) →</a></p>
-                    <p class="install-note">download the <code style="font-size:12px">apk</code> artifact from the run page after signing in</p>
+                    <p class="install-note"><a href="https://github.com/openlawsvpn/openlawsvpn-android/actions" style="color:var(--blue)">Latest CI build (GitHub Actions) →</a></p>
+                    <p class="install-note">download the <code style="font-size:12px">apk</code> artifact from the latest passing run</p>
                   </div>
-
                 </div>
               </div>
 
+              <p class="install-note">includes Relay screen — approve headless agent VPN auth from your phone</p>
               <p class="install-note">iOS / macOS planned for a future release</p>
 
             </div>
@@ -490,14 +789,14 @@ make linux</code></pre>
     </div>
   </section>
 
-<footer>
-  <div class="container">
-    &copy; 2026 openlawsvpn contributors &nbsp;·&nbsp;
-    <a href="https://github.com/openlawsvpn/openlawsvpn">GitHub</a> &nbsp;·&nbsp;
-    <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="mailto:security@openlawsvpn.com">security@openlawsvpn.com</a>
-  </div>
-</footer>
+  <footer>
+    <div class="container">
+      &copy; 2026 openlawsvpn contributors &nbsp;·&nbsp;
+      <a href="https://github.com/openlawsvpn/openlawsvpn">GitHub</a> &nbsp;·&nbsp;
+      <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="mailto:security@openlawsvpn.com">security@openlawsvpn.com</a>
+    </div>
+  </footer>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FT1WE72MX"></script>
@@ -505,7 +804,6 @@ make linux</code></pre>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-0FT1WE72MX');
 </script>
 <script data-goatcounter="https://vorona.goatcounter.com/count"
