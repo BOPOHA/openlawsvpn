@@ -1,5 +1,7 @@
 # openlawsvpn — AWS Client VPN for Linux
 
+> **Archived:** This repo contains the original C++ library (`libopenlawsvpn`) and Flutter GUI. Active development has moved to [go-openlawsvpn](https://github.com/openlawsvpn/go-openlawsvpn) (pure Go daemon + GTK4 GUI).
+
 A specialized OpenVPN 3 client for AWS Client VPN endpoints with native SAML/SSO authentication. Supports Okta, Azure AD, Google Workspace, and any SAML 2.0 IdP.
 
 ## Key Features
